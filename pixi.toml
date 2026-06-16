@@ -1,0 +1,28 @@
+[workspace]
+authors = ["Fred Thomas <fred.thomas@eci.ox.ac.uk>"]
+channels = ["conda-forge", "bioconda", "nodefaults"]
+name = "thomas2024-analysis"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.12"
+pip = "*"
+black = "*"
+flake8 = "*"
+ipykernel = "*"
+jupyter = "*"
+nb_conda_kernels = "*"
+nbstripout = "*"
+gdal = "*"
+geopandas = "*"
+contextily = "*"
+matplotlib = "*"
+netcdf4 = "*"
+numpy = "*"
+pandas = "*"
+pyarrow = "*"
+xarray = "*"
+ruff = "*"
