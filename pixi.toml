@@ -26,3 +26,12 @@ pandas = "*"
 pyarrow = "*"
 xarray = "*"
 ruff = "*"
+networkit = ">=11.2,<12"
+openpyxl = ">=3.1.5,<4"
+xgboost = ">=3.4.1,<4"
+shap = ">=0.52.0,<0.53"
+scikit-learn = ">=1.9.0,<2"
+statsmodels = "*"
+
+[pypi-dependencies]
+thomas2024 = { path = ".", editable = true }
