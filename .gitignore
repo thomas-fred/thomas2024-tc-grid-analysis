@@ -1,3 +1,5 @@
+data/
+
 **/*.egg-info/*
 **/__pycache__/*
 
@@ -10,3 +12,5 @@
 plots
 
 notebooks/.ipynb_checkpoints/
+
+*.png
