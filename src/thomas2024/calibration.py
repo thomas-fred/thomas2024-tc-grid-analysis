@@ -45,3 +45,26 @@ def lookup_pop_at_risk(df: pd.DataFrame, thresholds_by_country: pd.DataFrame) ->
     df = df.drop(columns='threshold_col')
 
     return df
+
+
+def lookup_pop_exposed(df: pd.DataFrame, thresholds_by_country: pd.DataFrame) -> pd.DataFrame:
+    """Select each event-country row's calibrated ``exposed_pop_*`` exposure column.
+
+    ``df`` must contain ``event_id``, ``iso_a3``, and columns named like
+    ``exposed_pop_20.0``. The result contains the two keys and ``pop_exposed``.
+    Countries without a calibrated threshold or a matching column receive NaN.
+    """
+    thresholds = thresholds_by_country.reset_index()[["iso_a3", "threshold_ms-1"]]
+    rows = df[["event_id", "iso_a3"]].merge(thresholds, on="iso_a3", how="left")
+
+    exposure_cols = [column for column in df.columns if column.startswith("exposed_pop_")]
+    col_index = {column: index for index, column in enumerate(exposure_cols)}
+    target_col = "exposed_pop_" + rows["threshold_ms-1"].astype(str)
+    idx = target_col.map(col_index)
+    values = df[exposure_cols].to_numpy()
+    valid = idx.notna()
+
+    pop_exposed = np.full(len(rows), np.nan)
+    pop_exposed[valid] = values[np.where(valid)[0], idx[valid].astype(int)]
+    rows["exposed_pop"] = pop_exposed
+    return rows[["event_id", "iso_a3", "exposed_pop"]]
