@@ -32,6 +32,8 @@ xgboost = ">=3.4.1,<4"
 shap = ">=0.52.0,<0.53"
 scikit-learn = ">=1.9.0,<2"
 statsmodels = "*"
+adjusttext = ">=1.4.0,<2"
 
 [pypi-dependencies]
 thomas2024 = { path = ".", editable = true }
+textalloc = ">=1.2.4, <2"
